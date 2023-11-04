@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:time_management/common/screen/main_screen.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class  extends StatelessWidget {
-  const ({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  runApp(
+    MaterialApp(
+      home: MainScreen(),
+    ),
+  );
 }
