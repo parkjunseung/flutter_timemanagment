@@ -88,3 +88,26 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: GmarketSans
+      fonts:
+        - asset: assets/font/GmarketSansTTFBold.ttf
+          weight: 500
+        - asset: assets/font/GmarketSansTTFMedium.ttf
+          weight: 200
+        - asset: assets/font/GmarketSansTTFLight.ttf
+          weight: 100
+    - family: KimDaeGeon
+      fonts:
+        - asset: assets/font/KimDaeGeonMedium.otf
+          weight: 400
+        - asset: assets/font/KimDaeGeonLight.otf
+          weight: 200
+    - family: TAEBAEK
+      fonts:
+        - asset: assets/font/TAEBAEK.ttf
+          weight: 200
+    - family: UnifrakturCook
+      fonts:
+        - asset: assets/font/UnifrakturCook.ttf
+          weight: 500
