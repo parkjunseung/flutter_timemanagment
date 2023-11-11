@@ -91,23 +91,23 @@ flutter:
   fonts:
     - family: GmarketSans
       fonts:
-        - asset: assets/font/GmarketSansTTFBold.ttf
+        - asset: assets/fonts/GmarketSansTTFBold.ttf
           weight: 500
-        - asset: assets/font/GmarketSansTTFMedium.ttf
+        - asset: assets/fonts/GmarketSansTTFMedium.ttf
           weight: 200
-        - asset: assets/font/GmarketSansTTFLight.ttf
+        - asset: assets/fonts/GmarketSansTTFLight.ttf
           weight: 100
     - family: KimDaeGeon
       fonts:
-        - asset: assets/font/KimDaeGeonMedium.otf
+        - asset: assets/fonts/KimDaeGeonMedium.otf
           weight: 400
-        - asset: assets/font/KimDaeGeonLight.otf
+        - asset: assets/fonts/KimDaeGeonLight.otf
           weight: 200
     - family: TAEBAEK
       fonts:
-        - asset: assets/font/TAEBAEK.ttf
+        - asset: assets/fonts/TAEBAEK.ttf
           weight: 200
     - family: UnifrakturCook
       fonts:
-        - asset: assets/font/UnifrakturCook.ttf
+        - asset: assets/fonts/UnifrakturCook.ttf
           weight: 500
