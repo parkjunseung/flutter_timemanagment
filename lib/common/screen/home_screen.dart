@@ -7,10 +7,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Navbar(),
-      appBar: AppBar(),
-      body: MainScreen(),
+    return SafeArea(
+      child: Scaffold(
+        primary: true,
+        extendBodyBehindAppBar: true,
+        endDrawer: Navbar(),
+        body: Column(
+            children: [
+              Text('임시 화면입니다.'),
+            ],
+          ),
+        ),
     );
   }
 }

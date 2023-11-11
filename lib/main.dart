@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:time_management/common/screen/home_screen.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:time_management/router/router.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
 
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    ),
-  );
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      designSize: const Size(395, 852),
+      builder: (BuildContext context, child) {
+        return MaterialApp.router(
+          theme: ThemeData(
+            fontFamily: 'TAEBAEK',
+            scaffoldBackgroundColor: Color(0xFFFFFFFF),
+          ),
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+        );
+      }
+    );
+  }
 }

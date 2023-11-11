@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_management/calendar/view/calendarDetails.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -10,23 +11,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            child: Text('ddd'),
+    return Expanded(
+          child: Container(
+            height: 852,
+            child: Column(
+              children: [
+                CalendarDetails(),
+              ],
+            ),
           ),
-          Container(
-            child: Text('ddd'),
-          ),
-          Container(
-            child: Text('ddd'),
-          ),
-          Container(
-            child: Text('ddd'),
-          ),
-        ],
-      ),
     );
   }
 }
