@@ -13,11 +13,12 @@ class HomeScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         endDrawer: Navbar(),
         body: Column(
-            children: [
-              Text('임시 화면입니다.'),
-            ],
-          ),
+          children: [
+            Text('임시 화면입니다.'),
+            MainScreen(),
+          ],
         ),
+      ),
     );
   }
 }
