@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:time_management/calendar/view/calendar.dart';
 import 'package:time_management/calendar/view/calendarDetails.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,10 +15,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Expanded(
           child: Container(
-            height: 852,
+            width: 395.w,
+            height: 852.h,
             child: Column(
               children: [
-                CalendarDetails(),
+                Text('임시 화면입니다.'),
+                Calendar(),
               ],
             ),
           ),
