@@ -10,58 +10,21 @@ class CalendarDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 421.h,
-          child: Column(
-            children: [
-              CalenarWeek(),
-              Row(
-                children: [
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                ],
-              ),
-              Row(
-                children: [
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                ],
-              ),
-              Row(
-                children: [
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                ],
-              ),
-              Row(
-                children: [
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                  CalendarDate(),
-                ],
-              ),
-            ],
+        Center(
+          child: Container(
+            height: 421.h,
+            child: Column(
+              children: [
+                CalenarWeek(),
+                Row(
+                  children: [
+                    CalendarDate(),
+                  ],
+                ),
+              ],
+            ),
           ),
-        )
+        ),
       ],
     );
   }

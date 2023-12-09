@@ -7,7 +7,7 @@ class CalenarWeek extends StatelessWidget {
   Widget DayContainer(String day, Color color) {
     return Center(
       child: Container(
-        width: 55.55.w,
+        width: 56.w,
         height: 27.29.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
