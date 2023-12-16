@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:time_management/common/main_screen.dart';
+import 'package:time_management/view/main_screen.dart';
 
 final router = GoRouter(
   routes: [

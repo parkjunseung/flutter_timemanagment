@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:time_management/common/floating/floating_button.dart';
-import 'package:time_management/common/screen/home_screen.dart';
+import 'package:time_management/common/components/floating/floating_button.dart';
+import 'package:time_management/common/view/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
