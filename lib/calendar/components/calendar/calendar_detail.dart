@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:time_management/calendar/components/calendar/calendar_week.dart';
-import 'package:time_management/calendar/view/calendar/calendar_Date.dart';
+import 'package:time_management/calendar/components/calendar/calendar_Date.dart';
 
 class CalendarDetail extends StatelessWidget {
   const CalendarDetail({Key? key}) : super(key: key);
