@@ -1,13 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:time_management/view/main_screen.dart';
+import 'package:time_management/user/provider/auth_provider.dart';
 
-final router = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) {
-        return MainScreen();
-      },
-    ),
-  ],
-);
+final routerProvider = Provider<GoRouter>((ref) {
+  final provider = ref.read(authProvider);
+
+  return GoRouter(
+    routes: provider.routes,
+    initialLocation: '/splash',
+    refreshListenable: provider,
+    redirect: provider.redirectLogic,
+  );
+});
