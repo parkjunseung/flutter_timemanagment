@@ -16,18 +16,18 @@ class UserModelLoading extends UserModelBase {}
 
 @JsonSerializable()
 class UserModel extends UserModelBase {
-  final String id;
+  final String? id;
   final String username;
   final bool isPushNotification;
   final DateTime createdDate;
-  final DateTime updatedDate;
+  final DateTime? updatedDate;
 
   UserModel({
-    required this.id,
+    this.id,
     required this.username,
     required this.isPushNotification,
     required this.createdDate,
-    required this.updatedDate,
+    this.updatedDate,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

@@ -47,8 +47,6 @@ class AuthProvider extends ChangeNotifier {
   // SplashScreen
   String? redirectLogic(BuildContext context, GoRouterState state) {
     final UserModelBase? user = ref.read(userProvider);
-    print('redirectLogic');
-    print(user);
     if (user == null) {
       return '/profile';
     }

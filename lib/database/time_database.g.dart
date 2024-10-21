@@ -17,6 +17,11 @@ class $UserTable extends User with TableInfo<$UserTable, UserData> {
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -47,7 +52,7 @@ class $UserTable extends User with TableInfo<$UserTable, UserData> {
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, isPushNotification, createdDate, updatedDate];
+      [id, userId, name, isPushNotification, createdDate, updatedDate];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -60,6 +65,12 @@ class $UserTable extends User with TableInfo<$UserTable, UserData> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -100,6 +111,8 @@ class $UserTable extends User with TableInfo<$UserTable, UserData> {
     return UserData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       isPushNotification: attachedDatabase.typeMapping.read(
@@ -119,12 +132,14 @@ class $UserTable extends User with TableInfo<$UserTable, UserData> {
 
 class UserData extends DataClass implements Insertable<UserData> {
   final int id;
+  final String userId;
   final String name;
   final bool isPushNotification;
   final DateTime createdDate;
   final DateTime updatedDate;
   const UserData(
       {required this.id,
+      required this.userId,
       required this.name,
       required this.isPushNotification,
       required this.createdDate,
@@ -133,6 +148,7 @@ class UserData extends DataClass implements Insertable<UserData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<String>(userId);
     map['name'] = Variable<String>(name);
     map['is_push_notification'] = Variable<bool>(isPushNotification);
     map['created_date'] = Variable<DateTime>(createdDate);
@@ -143,6 +159,7 @@ class UserData extends DataClass implements Insertable<UserData> {
   UserCompanion toCompanion(bool nullToAbsent) {
     return UserCompanion(
       id: Value(id),
+      userId: Value(userId),
       name: Value(name),
       isPushNotification: Value(isPushNotification),
       createdDate: Value(createdDate),
@@ -155,6 +172,7 @@ class UserData extends DataClass implements Insertable<UserData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return UserData(
       id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<String>(json['userId']),
       name: serializer.fromJson<String>(json['name']),
       isPushNotification: serializer.fromJson<bool>(json['isPushNotification']),
       createdDate: serializer.fromJson<DateTime>(json['createdDate']),
@@ -166,6 +184,7 @@ class UserData extends DataClass implements Insertable<UserData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<String>(userId),
       'name': serializer.toJson<String>(name),
       'isPushNotification': serializer.toJson<bool>(isPushNotification),
       'createdDate': serializer.toJson<DateTime>(createdDate),
@@ -175,12 +194,14 @@ class UserData extends DataClass implements Insertable<UserData> {
 
   UserData copyWith(
           {int? id,
+          String? userId,
           String? name,
           bool? isPushNotification,
           DateTime? createdDate,
           DateTime? updatedDate}) =>
       UserData(
         id: id ?? this.id,
+        userId: userId ?? this.userId,
         name: name ?? this.name,
         isPushNotification: isPushNotification ?? this.isPushNotification,
         createdDate: createdDate ?? this.createdDate,
@@ -190,6 +211,7 @@ class UserData extends DataClass implements Insertable<UserData> {
   String toString() {
     return (StringBuffer('UserData(')
           ..write('id: $id, ')
+          ..write('userId: $userId, ')
           ..write('name: $name, ')
           ..write('isPushNotification: $isPushNotification, ')
           ..write('createdDate: $createdDate, ')
@@ -199,13 +221,14 @@ class UserData extends DataClass implements Insertable<UserData> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, isPushNotification, createdDate, updatedDate);
+  int get hashCode => Object.hash(
+      id, userId, name, isPushNotification, createdDate, updatedDate);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is UserData &&
           other.id == this.id &&
+          other.userId == this.userId &&
           other.name == this.name &&
           other.isPushNotification == this.isPushNotification &&
           other.createdDate == this.createdDate &&
@@ -214,12 +237,14 @@ class UserData extends DataClass implements Insertable<UserData> {
 
 class UserCompanion extends UpdateCompanion<UserData> {
   final Value<int> id;
+  final Value<String> userId;
   final Value<String> name;
   final Value<bool> isPushNotification;
   final Value<DateTime> createdDate;
   final Value<DateTime> updatedDate;
   const UserCompanion({
     this.id = const Value.absent(),
+    this.userId = const Value.absent(),
     this.name = const Value.absent(),
     this.isPushNotification = const Value.absent(),
     this.createdDate = const Value.absent(),
@@ -227,15 +252,18 @@ class UserCompanion extends UpdateCompanion<UserData> {
   });
   UserCompanion.insert({
     this.id = const Value.absent(),
+    required String userId,
     required String name,
     required bool isPushNotification,
     this.createdDate = const Value.absent(),
     required DateTime updatedDate,
-  })  : name = Value(name),
+  })  : userId = Value(userId),
+        name = Value(name),
         isPushNotification = Value(isPushNotification),
         updatedDate = Value(updatedDate);
   static Insertable<UserData> custom({
     Expression<int>? id,
+    Expression<String>? userId,
     Expression<String>? name,
     Expression<bool>? isPushNotification,
     Expression<DateTime>? createdDate,
@@ -243,6 +271,7 @@ class UserCompanion extends UpdateCompanion<UserData> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
       if (name != null) 'name': name,
       if (isPushNotification != null)
         'is_push_notification': isPushNotification,
@@ -253,12 +282,14 @@ class UserCompanion extends UpdateCompanion<UserData> {
 
   UserCompanion copyWith(
       {Value<int>? id,
+      Value<String>? userId,
       Value<String>? name,
       Value<bool>? isPushNotification,
       Value<DateTime>? createdDate,
       Value<DateTime>? updatedDate}) {
     return UserCompanion(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       name: name ?? this.name,
       isPushNotification: isPushNotification ?? this.isPushNotification,
       createdDate: createdDate ?? this.createdDate,
@@ -271,6 +302,9 @@ class UserCompanion extends UpdateCompanion<UserData> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<String>(userId.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -291,6 +325,7 @@ class UserCompanion extends UpdateCompanion<UserData> {
   String toString() {
     return (StringBuffer('UserCompanion(')
           ..write('id: $id, ')
+          ..write('userId: $userId, ')
           ..write('name: $name, ')
           ..write('isPushNotification: $isPushNotification, ')
           ..write('createdDate: $createdDate, ')

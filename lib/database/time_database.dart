@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
@@ -20,7 +19,9 @@ class LocalDataBase extends _$LocalDataBase{
   LocalDataBase() : super(_openConnection());
 
   // select
-  Future<UserData> getUserList(int id) => (select(user)..where((tbl) => tbl.id.equals(id))).getSingle();
+  Future<UserData> getUser() => select(user).getSingle() ;
+  // createUser
+  Future<int> createUser(UserCompanion data) => into(user).insert(data);
 
   @override
   int get schemaVersion => 1;

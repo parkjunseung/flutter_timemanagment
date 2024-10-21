@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
+import 'package:time_management/database/time_database.dart';
 import 'package:time_management/router/router.dart';
 
 void main() {
+  final database = LocalDataBase();
+  GetIt.I.registerSingleton<LocalDataBase>(database);
   runApp(
     ProviderScope(
       child: MyApp(),
@@ -23,7 +27,7 @@ class MyApp extends ConsumerWidget {
       builder: (BuildContext context, child) {
         return MaterialApp.router(
           theme: ThemeData(
-            fontFamily: 'GmarketSans',
+            fontFamily: 'TAEBAEK',
           ),
           routerDelegate: router.routerDelegate,
           routeInformationParser: router.routeInformationParser,

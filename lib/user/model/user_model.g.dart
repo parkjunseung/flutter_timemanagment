@@ -7,11 +7,13 @@ part of 'user_model.dart';
 // **************************************************************************
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       username: json['username'] as String,
       isPushNotification: json['isPushNotification'] as bool,
       createdDate: DateTime.parse(json['createdDate'] as String),
-      updatedDate: DateTime.parse(json['updatedDate'] as String),
+      updatedDate: json['updatedDate'] == null
+          ? null
+          : DateTime.parse(json['updatedDate'] as String),
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -19,5 +21,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'username': instance.username,
       'isPushNotification': instance.isPushNotification,
       'createdDate': instance.createdDate.toIso8601String(),
-      'updatedDate': instance.updatedDate.toIso8601String(),
+      'updatedDate': instance.updatedDate?.toIso8601String(),
     };
